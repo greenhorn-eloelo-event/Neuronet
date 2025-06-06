@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    id("maven-publish")
     kotlin("plugin.serialization") version "1.9.0"
 }
 
@@ -32,6 +33,9 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
+//        pod("AppsFlyerFramework") {
+//            version = "6.17.0"
+//        }
     }
     
     sourceSets {
@@ -61,6 +65,21 @@ kotlin {
     }
 }
 
+
+publishing {
+    publications {
+        // Use 'create' with a specific name for your KMP publication
+        withType<MavenPublication>().matching{ it.name == "kotlinMultiplatform" }.configureEach { // <-- Use create method and specify type
+            groupId = "com.eloelo.events.analytics" // Your Group ID
+            artifactId = "greenhorn-eloelo-event" // Your Artifact ID
+            version = "1.0" // Your Version
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
 android {
     namespace = "com.eloelo.events.analytics"
     compileSdk = 35
@@ -80,6 +99,7 @@ dependencies {
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
 }
+
 room {
     schemaDirectory("$projectDir/schemas")
 }

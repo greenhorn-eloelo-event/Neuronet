@@ -3,6 +3,7 @@ package com.eloelo.events.analytics.eventsdk
 import com.appsflyer.AppsFlyerLib
 
 // Actual implementation for Android
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class AppsFlyerWrapper {
     // You might want to initialize AppsFlyerLib in your Android application's Application class
     // or through some other dedicated init. For this example, we assume it's initialized externally
@@ -18,6 +19,5 @@ actual class AppsFlyerWrapper {
         // AppsFlyer is usually started in the Application class onCreate
         // For simplicity, this is an example method.
         // AppsFlyerLib.getInstance().start(context.androidContext)
-        println("AppsFlyerLib start called on Android (placeholder).")
     }
 }
