@@ -1,0 +1,45 @@
+[versions]
+afAndroidSdk = "6.17.0"
+agp = "8.10.1"
+kotlin = "2.1.21"
+kotlinxCoroutinesCore = "1.10.2"
+ktorClientContentNegotiation = "2.3.9"
+ktorSerializationKotlinxJson = "2.3.9"
+sqlite = "2.5.1"
+roomRuntimeAndroid = "2.7.1"
+ksp_version = "2.1.21-2.0.1"
+kotlinxSerializationJson = "1.8.1"
+koin-bom = "4.0.0"
+ktor = "3.1.3"
+workRuntimeKtx = "2.10.1"
+
+
+[libraries]
+af-android-sdk = { module = "com.appsflyer:af-android-sdk", version.ref = "afAndroidSdk" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+
+
+# Koin
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-core = { module = "io.insert-koin:koin-core"}
+
+# Room
+ktor-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntimeAndroid" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntimeAndroid" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
+
+[plugins]
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp_version" }
+room = { id = "androidx.room", version.ref = "roomRuntimeAndroid" }
