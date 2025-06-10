@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.room)
     id("maven-publish")
     kotlin("plugin.serialization") version "1.9.0"
+//    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -33,15 +34,14 @@ kotlin {
             baseName = "shared"
             isStatic = true
         }
-//        pod("AppsFlyerFramework") {
-//            version = "6.17.0"
-//        }
+        pod("AppsFlyerFramework")
     }
     
     sourceSets {
         iosMain.dependencies {
             implementation(libs.sqlite.bundled)
             implementation(libs.ktor.client.darwin)
+            implementation(libs.runtime)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.runtime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
