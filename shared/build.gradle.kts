@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.kotlinCocoapods)
+//    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
@@ -21,31 +21,49 @@ kotlin {
             }
         }
     }
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "17.5"
-        framework {
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
             baseName = "shared"
             isStatic = true
         }
-//        pod("AppsFlyerFramework")
     }
+
+
+//    cocoapods {
+//        summary = "Some description for the Shared Module"
+//        homepage = "Link to the Shared Module homepage"
+//        version = "1.0"
+//        ios.deploymentTarget = "16.0"
+//        podfile = project.file("../iosApp/Podfile")
+//        framework {
+//            baseName = "shared"
+//            isStatic = true
+//        }
+//        pod("AppsFlyerFramework"){
+//            version = libs.versions.pod.appsflyer.get()
+//            framework {
+//                baseName = "AppsFlyerFramework"
+//                isStatic = true
+//            }
+//        }
+//    }
     
     sourceSets {
         iosMain.dependencies {
             implementation(libs.sqlite.bundled)
             implementation(libs.ktor.client.darwin)
             implementation(libs.runtime)
+//            implementation(libs.native.driver)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.work.runtime.ktx)
+//            implementation(libs.native.driver)
         }
 
         commonMain.dependencies {
@@ -66,7 +84,6 @@ kotlin {
     }
 }
 
-
 publishing {
     publications {
         // Use 'create' with a specific name for your KMP publication
@@ -78,6 +95,7 @@ publishing {
     }
     repositories {
         mavenLocal()
+        mavenCentral()
     }
 }
 

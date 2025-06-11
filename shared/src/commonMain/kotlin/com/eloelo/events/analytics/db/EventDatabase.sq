@@ -1,0 +1,22 @@
+CREATE TABLE Event (
+    id TEXT NOT NULL PRIMARY KEY,
+    type TEXT NOT NULL,
+    payload TEXT AS Map<TEXT, TEXT> NOT NULL, -- Custom type for Map
+    timestamp INTEGER NOT NULL,
+    isSynced INTEGER AS Boolean NOT NULL DEFAULT 0
+);
+
+insertEvent:
+INSERT OR REPLACE INTO Event(id, type, payload, timestamp, isSynced) VALUES (?, ?, ?, ?, ?);
+
+getUnsyncedEvents:
+SELECT * FROM Event WHERE isSynced = 0 ORDER BY timestamp ASC LIMIT ?;
+
+markEventsAsSynced:
+UPDATE Event SET isSynced = 1 WHERE id IN :eventIds;
+
+deleteSyncedEvents:
+DELETE FROM Event WHERE id IN :eventIds;
+
+getEventCount:
+SELECT COUNT(*) FROM Event;
